@@ -1129,17 +1129,17 @@ local themes = {
    Fatality = {
         ["Accent"] = Color3.fromRGB(197,7,83),
         ["Window Background"] = Color3.fromRGB(25,19,53),
-        ["Window Border"] = Color3.fromRGB(197,7,83),
-        ["Tab Background"] = Color3.fromRGB(29,23,66),
-        ["Tab Border"] = Color3.fromRGB(197,7,83),
-        ["Tab Toggle Background"] = Color3.fromRGB(28, 28, 32),
-        ["Section Background"] = Color3.fromRGB(18, 18, 22),
-        ["Section Border"] = Color3.fromRGB(197,7,83),
+        ["Window Border"] = Color3.fromRGB(0, 0, 0),
+        ["Tab Background"] = Color3.fromRGB(25, 19, 53),
+        ["Tab Border"] = Color3.fromRGB(107, 18, 56),
+        ["Tab Toggle Background"] = Color3.fromRGB(29, 23, 66),
+        ["Section Background"] = Color3.fromRGB(25, 19, 53),
+        ["Section Border"] = Color3.fromRGB(93, 22, 53),
         ["Text"] = Color3.fromRGB(235,235,235),
-        ["Disabled Text"] = Color3.fromRGB(175, 21, 21),
-        ["Object Background"] = Color3.fromRGB(25, 25, 29),
-        ["Object Border"] = Color3.fromRGB(35, 35, 39),
-        ["Dropdown Option Background"] = Color3.fromRGB(19, 19, 23)
+        ["Disabled Text"] = Color3.fromRGB(235,235,235),
+        ["Object Background"] = Color3.fromRGB(29, 23, 66),
+        ["Object Border"] = Color3.fromRGB(42, 42, 83),
+        ["Dropdown Option Background"] = Color3.fromRGB(29, 22, 72)
     }
 }
 
