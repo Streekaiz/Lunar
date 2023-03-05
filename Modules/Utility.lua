@@ -190,7 +190,7 @@ end)
 
 Module:Connect(game:GetService("Players").PlayerRemoving, function(Player)
     Module:ESPRemovePlayer(Player)
-    table.remove(Module.Players, table.find(Module.Players, tostring(Player.Name))
+    table.remove(Module.Players, table.find(Module.Players, tostring(Player.Name)))
 end)
 
 return Module
