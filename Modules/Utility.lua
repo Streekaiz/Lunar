@@ -180,14 +180,17 @@ end
 
 for _, v in next, game:GetService("Players"):GetPlayers() do
     Module:ESPAddPlayer(v)
+    table.insert(Module.Players, tostring(v.Name))
 end
 
 Module:Connect(game:GetService("Players").PlayerAdded, function(Player)
     Module:ESPAddPlayer(Player)
+    table.insert(Module.Players, tostring(Player.Name))
 end)
 
 Module:Connect(game:GetService("Players").PlayerRemoving, function(Player)
     Module:ESPRemovePlayer(Player)
+    table.remove(Module.Players, table.find(Module.Players, tostring(Player.Name))
 end)
 
 return Module
