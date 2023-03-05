@@ -135,6 +135,28 @@ function Module:Draw(class, offset, properties, hidden)
     return fakeDraw
 end
 
+function Module:GetBulletAttribute(attribute)
+    local attribute_value = nil
+    local name = game:GetService("Players").LocalPlayer.Name
+    local status = game.ReplicatedStorage.Players[name]:FindFirstChild("Status")
+    if status then
+        local equipped_tool = status.GameplayVariables.EquippedTool.Value
+        if equipped_tool then
+            local inventory_equipped_tool = game.ReplicatedStorage.Players[ name].Inventory:FindFirstChild(tostring(equipped_tool))
+            if inventory_equipped_tool then
+                local mag = inventory_equipped_tool.Attachments:FindFirstChild("Magazine") and inventory_equipped_tool.Attachments:FindFirstChild("Magazine"):FindFirstChildOfClass("StringValue") and inventory_equipped_tool.Attachments:FindFirstChild("Magazine"):FindFirstChildOfClass("StringValue"):FindFirstChild("ItemProperties").LoadedAmmo or inventory_equipped_tool.ItemProperties:FindFirstChild("LoadedAmmo")
+                if mag then
+                    local first_bullet_type = mag:FindFirstChild("1")
+                    if first_bullet_type then
+                        attribute_value = game.ReplicatedStorage.AmmoTypes[first_bullet_type:GetAttribute("AmmoType")]:GetAttribute(attribute)
+                    end
+                end
+            end
+        end
+    end
+    return attribute_value
+end
+
 function Module:ESPAddPlayer(v)
     Module.ESP[v] = {
         BoxOutline = Module:Draw("Square", Vector2.new(), {Visible = false, Filled = false, Thickness = 3}, true),
