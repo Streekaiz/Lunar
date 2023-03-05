@@ -30,7 +30,7 @@ function Module:IsAlive(Player)
 end
 
 function Module:isTarget(plr, teammates)
-	if Module:isAlive(plr) then
+	if Module:IsAlive(plr) then
 		if not plr.Neutral and not lplr.Neutral then
 			if teammates == false then
 				return plr.Team ~= lplr.Team
