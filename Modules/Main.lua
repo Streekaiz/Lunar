@@ -29,6 +29,20 @@ function Module:IsAlive(Player)
     return false
 end
 
+function Module:isTarget(plr, teammates)
+	if Module:isAlive(plr) then
+		if not plr.Neutral and not lplr.Neutral then
+			if teammates == false then
+				return plr.Team ~= lplr.Team
+			elseif teammates == true then
+				return plr ~= lplr
+			end
+		else
+			return plr ~= lplr
+		end
+	end
+end
+
 function Module:WorldToViewport(pos)
     local Position, OnScreen = workspace.CurrentCamera:WorldToViewportPoint(pos)
     return Position, OnScreen
