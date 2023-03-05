@@ -1,5 +1,4 @@
--- Lunar - Project Delta --
--- Module
+
 local Module = {
     Hooks = {},
     Players = {},
