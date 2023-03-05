@@ -18,15 +18,15 @@ function Module:IsLoaded()
     return Module.Loaded
 end
 
-function Module:IsAlive(Player)
-    if Player:FindFirstChild("Character") then
-        if Player.Character:FindFirstChild("Head") and Player.Character:FindFirstChild("HumanoidRootPart") then
-            if Player.Character:FindFirstChild("Humanoid") and Player.Character.Humanoid.Health ~= 0 then
-                return true
-            end
-        end
+function Module:IsAlive(player)
+    local alive = false
+    if player ~= nil and player.Parent == game.Players and player.Character ~= nil then
+		if player.Character:FindFirstChild("HumanoidRootPart") and player.Character:FindFirstChild("Humanoid") ~= nil and player.Character.Humanoid.Health > 0 and player.Character:FindFirstChild("Head") then
+			alive = true
+		end
     end
-    return false
+
+    return alive
 end
 
 function Module:isTarget(plr, teammates)
