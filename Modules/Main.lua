@@ -2,6 +2,7 @@
 local Module = {
     Hooks = {},
     Players = {},
+    Whitelisted = {},
     Drawings = {},
     Connections = {},
     ESP = {},
