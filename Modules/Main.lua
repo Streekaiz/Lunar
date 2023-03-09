@@ -19,15 +19,15 @@ function Module:IsLoaded()
     return Module.Loaded
 end
 
-function Module:ChangeModel(args)
+function Module:ChangeArms(args)
     if args.Type == "Color" then
-        for _, v in next, game.Camera:FindFirstChild("ViewModel"):GetDescendants() do
+        for _, v in next, game.Camera:FindFirstChild("ViewModel"):GetChildren() do
             if v:IsA("BasePart") and v.Color ~= args.Color then
                 v.Color = args.Color
             end
         end
     elseif args.Type == "Material" then
-        for _, v in next, game.Camera:FindFirstChild("ViewModel"):GetDescendants() do
+        for _, v in next, game.Camera:FindFirstChild("ViewModel"):GetChildren() do
             if v:IsA("BasePart") and v.Material ~= args.Material then
                 v.Material = args.Material
             end
@@ -36,6 +36,44 @@ function Module:ChangeModel(args)
         for _, v in next, game.Camera:FindFirstChild("ViewModel"):GetDescendants() do
             if v:IsA("BasePart") then
                 v.CFrame = v.CFrame * args.Offset
+            end
+        end
+    end
+end
+
+function Module:ChangeArms(args)
+    if args.Type == "Color" then
+        for _, v in next, game.Camera.ViewModel:GetChildren() do
+            if v:IsA("BasePart") and v.Color ~= args.Color then
+                v.Color = args.Color
+            end
+        end
+    elseif args.Type == "Material" then
+        for _, v in next, game.Camera.ViewModel:GetChildren() do
+            if v:IsA("BasePart") and v.Material ~= args.Material then
+                v.Material = args.Material
+            end
+        end
+    elseif args.Type == "Offset" then
+        for _, v in next, game.Camera.ViewModel:GetDescendants() do
+            if v:IsA("BasePart") then
+                v.CFrame = v.CFrame * args.Offset
+            end
+        end
+    end
+end
+
+function Module:ChangeWeapon(args)
+    if args.Type == "Color" then
+        for _, v in next, game.Camera.ViewModel.Item:GetChildren() do
+            if v:IsA("BasePart") and v.Color ~= args.Color then
+                v.Color = args.Color
+            end
+        end
+    elseif args.Type == "Material" then
+        for _, v in next, game.Camera.ViewModel.Item:GetChildren() do
+            if v:IsA("BasePart") and v.Material ~= args.Material then
+                v.Material = args.Material
             end
         end
     end
