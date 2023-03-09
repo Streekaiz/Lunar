@@ -150,8 +150,35 @@ Section.Visuals.ESP[1]:Toggle({Name = "Show AI / NPCS", Default = true, Flag = "
 Section.Visuals.ESP[1]:Toggle({Name = "Show friends", Default = false, Flag = "ESP_Friends"})
 Section.Visuals.ESP[1]:Toggle({Name = "Show whitelisted", Default = false, Flag = "ESP_Whitelist"}) 
 
-
+Section.Visuals.Viewmodel[1]:Toggle({Name = "Enabled", Flag = "Viewmodel_Arms", Callback = function()
+    
+end}):Colorpicker({Name = "Arms Color", Default = Color3.fromRGB(126, 33, 255), Flag = "Viewmodel_Arms_Color"})
+Section.Visuals.Viewmodel[1]:Dropdown({Name = "Material", Content = {"Forcefield", "Neon", "Plastic"}})
+Section.Visuals.Viewmodel[2]:Toggle({Name = "Enabled", Flag = "Viewmodel_Arms", Callback = function()
+    
+end}):Colorpicker({Name = "Arms Color", Default = Color3.fromRGB(126, 33, 255), Flag = "Viewmodel_Arms_Color"})
+Section.Visuals.Viewmodel[2]:Dropdown({Name = "Material", Content = {"Forcefield", "Neon", "Plastic"}})
+Section.Visuals.Viewmodel[3]:Toggle({Name = "Enabled", Flag = "Viewmodel_Arms", Callback = function()
+    
+end}):Colorpicker({Name = "Arms Color", Default = Color3.fromRGB(126, 33, 255), Flag = "Viewmodel_Arms_Color"})
+Section.Visuals.Viewmodel[3]:Dropdown({Name = "Material", Content = {"Forcefield", "Neon", "Plastic"}})
 Library:Init()
+
+Utility:Connect(game:GetService("RunService").Heartbeat, function()
+    if workspace.Camera:FindFirstChild("ViewModel") then
+        Utility:ChangeArms{{
+            
+        }}
+        Utility:ChangeArms{{
+            Type = "Color",
+            Color = Library.flags["Viewmodel_Arms_Color"]
+        }}
+        Utility:ChangeArms{{
+            Type = "Material",
+            Material = Library.flags["Viewmodel_Arms_Material"]
+        }}
+    end
+end)
 
 Utility:Connect(game:GetService("RunService").RenderStepped, function(Delta)
     Watermark:Set("Lunar | Project Delta | FPS: " .. math.round(1 / Delta) .. " | Ping: " .. game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString(math.round(2 / Delta)) .. " | Status: Developer | " .. tostring(game:GetService("Players").LocalPlayer.Name))
