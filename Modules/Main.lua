@@ -65,13 +65,13 @@ end
 
 function Module:ChangeWeapon(args)
     if args.Type == "Color" then
-        for _, v in next, game.Camera.ViewModel.Item:GetChildren() do
+        for _, v in next, game.Camera.ViewModel.Item:GetDescendants() do
             if v:IsA("BasePart") and v.Color ~= args.Color then
                 v.Color = args.Color
             end
         end
     elseif args.Type == "Material" then
-        for _, v in next, game.Camera.ViewModel.Item:GetChildren() do
+        for _, v in next, game.Camera.ViewModel.Item:GetDescendants() do
             if v:IsA("BasePart") and v.Material ~= args.Material then
                 v.Material = args.Material
             end
