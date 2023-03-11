@@ -57,6 +57,17 @@ function Module:ChangeWeapon(args)
     end
 end
 
+function Module:PlaySound(sound, volume, pitch)
+    local SoundToPlay = sound == "Skeet" and "4753603610" or sound == "Gamesense" and "4817809188" or sound == "NeverLose" and "8726881116" or sound == "Rust" and "1255040462" or sound == "Osu" and "7149919358"
+    local Instance = Instance.new("Sound", game:GetService("SoundService"))
+    Instance.SoundId = "rbxassetid://" .. SoundToPlay
+    Instance.PlayOnRemove = true
+    Instance.Volume = volume
+    Instance.PlaybackSpeed = pitch
+    Instance:Destroy()
+end
+
+
 function Module:IsAlive(player)
     local alive = false
     if player ~= nil and player.Parent == game.Players and player.Character ~= nil then
