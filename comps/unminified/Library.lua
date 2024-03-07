@@ -4,7 +4,7 @@ local Fluent, SaveManager, InterfaceManager = loadstring(game:HttpGet("https://g
 
 local Window = Fluent:CreateWindow({
     Title = "lunar",
-    SubTitle = " .gg/luna",
+    SubTitle = " .gg/lunar",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
@@ -22,10 +22,10 @@ local Tabs = {
 
 Home:AddSection("Discord") do
     Tabs.Home:AddButton({
-        Title = "Rejoin",
+        Title = "Copy discord link",
         Description = "",
         Callback = function()
-            setclipboard
+            setclipboard()
         end
     })
     Tabs.Home:AddParagraph({
@@ -124,3 +124,4 @@ end
 Tabs.
 
 SaveManager:SetLibrary(Fluent) InterfaceManager:SetLibrary(Fluent) SaveManager:IgnoreThemeSettings() SaveManager:SetIgnoreIndexes({}) InterfaceManager:SetFolder("Lunar") SaveManager:SetFolder("Lunar/" .. tostring(game.PlaceId)) InterfaceManager:BuildInterfaceSection(Tabs.Settings) SaveManager:BuildConfigSection(Tabs.Settings) Window:SelectTab(1) SaveManager:LoadAutoloadConfig()
+`

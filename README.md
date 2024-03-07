@@ -10,18 +10,18 @@
 assert(writefolder and "Your executor isn't supported.")
 assert(writefile and "Your executor isn't supported.")
 --
-writefolder("Vynx")
-writefolder("Vynx/components")
-writefolder("Vynx/themes")
-writefolder("Vynx/configs")
+writefolder("Lunar")
+writefolder("Lunar/components")
+writefolder("Lunar/themes")
+writefolder("Lunar/configs")
 --
-writefile("Vynx/components/Utility.lua", game:HttpGet(""))
-writefile("Vynx/components/Math.lua", game:HttpGet(""))
-writefile("Vynx/components/Visual.lua", game:HttpGet(""))
-writefile("Vynx/components/Color.lua", game:HttpGet(""))
-writefile("Vynx/components/Tween.lua", game:HttpGet(""))
+writefile("Lunar/components/Utility.lua", game:HttpGet(""))
+writefile("Lunar/components/Math.lua", game:HttpGet("https://rawgithubusercontent.com/Streekaiz/Lunar/comps/minified/Math.lua"))
+writefile("Lunar/components/Visual.lua", game:HttpGet(""))
+writefile("Lunar/components/Color.lua", game:HttpGet("https://rawgithubusercontent.com/Streekaiz/Lunar/comps/minified/Color.lua"))
+writefile("Lunar/components/Tween.lua", game:HttpGet("https://rawgithubusercontent.com/Streekaiz/Lunar/comps/minified/Tween.lua"))
 ```
 ## Loadstring
 ```lua
-loadstring(game:HttpGet("https://rawgithubusercontent.com/Streekaiz/Vynx/source.lua"))()
+loadstring(game:HttpGet("https://rawgithubusercontent.com/Streekaiz/Lunar/source.lua"))()
 ```
