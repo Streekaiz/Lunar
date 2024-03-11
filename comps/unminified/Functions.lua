@@ -30,45 +30,29 @@ function Library:Unload()
     end
 end
 
-function Library:GetClient(Player)
-    local Attributes = {
-        Character = nil, 
-        Humanoid = nil, 
-        Tool = "",
-        Team = Player.Team,
-        Alive = false, 
-        Friendly = false,
-        Health = {
-            Current = 100,
-            Max = 100
-        },
-        BodyParts = {}
-    }
-
-    if Player.Character then
-        Attributes.Character = Player.Character 
-
-        if Player:FindFirstChildWhichIsA("Tool") then
-            Attributes.Tool = Player:FindFirstChildWhichIsA("Tool").Name
-        end
-
-        if Player.Character:FindFirstChildOfClass("Humanoid") then
-            Attributes.Humanoid = Player.Character:FindFirstChildOfClass("Humanoid")
-            if Player.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
-                Attributes.Alive = true
-                Attributes.Health.Current = Player.Character:FindFirstChildOfClass("Humanoid").Health
-                Attributes.Health.Max = Player.Character:FindFirstChildOfClass("Humanoid").MaxHealth
-            end
-        end
+function Library:isFriendly(Player)
+    if Player.Team == game:GetService("Players").LocalPlayer.Team then
+        return true
     end
-
-    if Attributes.Team == game:GetService("Players").LocalPlayer.Team then
-        Attributes.Friendly = true
-    end
-
-    return Attributes
+    return false
 end
 
+function Library:isAlive(Player)
+    if Player.Character:FindFirstChildOfClass("Humanoid") then
+        if Player.Character:FindFirstChildOfClass("Humanoid").Health > 0 then
+            return true
+        end
+    end
+    return false
+end
+
+function Library:hasTool(Player)
+    if Player.Character then 
+        if Player.Character:FindFirstChildWhichIsA("Tool") then
+            return Player.Character:FindFirstChildWhichIsA("Tool").Name
+        end
+    end
+end
 function Library:ConvertPercentage(Percentage)
     local Random = math.random(0, 100)
     if Random < Percentage then

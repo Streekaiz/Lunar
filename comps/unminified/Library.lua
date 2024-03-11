@@ -149,4 +149,8 @@ Tabs.Player:AddSection("Movement") do
     })
 end
 
+Tabs.Combat:AddSection("Hitbox Manipulation") do
+    Tabs.Combat:AddToggle("combat_hitbox", {Title = "Enabled", Description = "May not work for some games.", Default = false })
+end
+
 SaveManager:SetLibrary(Fluent) InterfaceManager:SetLibrary(Fluent) SaveManager:IgnoreThemeSettings() SaveManager:SetIgnoreIndexes({}) InterfaceManager:SetFolder("Lunar") SaveManager:SetFolder("Lunar/" .. tostring(game.PlaceId)) InterfaceManager:BuildInterfaceSection(Tabs.Settings) SaveManager:BuildConfigSection(Tabs.Settings) Window:SelectTab(1) SaveManager:LoadAutoloadConfig()
