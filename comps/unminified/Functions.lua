@@ -65,6 +65,8 @@ function Library:GetClient(Player)
     if Attributes.Team == game:GetService("Players").LocalPlayer.Team then
         Attributes.Friendly = true
     end
+
+    return Attributes
 end
 
 function Library:ConvertPercentage(Percentage)

@@ -16,6 +16,7 @@ local Window = Fluent:CreateWindow({
 
 local Tabs = {
     Home = Window:AddTab({ Title = "Home", Icon = "" }),
+    Player = Window:AddTab({ Title = "Player", Icon = ""}),
     Combat = Window:AddTab({ Title = "Combat", Icon = "" })
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
@@ -121,7 +122,31 @@ Home:AddSection("Server") do
 
 end
 
-Tabs.
+Tabs.Player:AddSection("Movement") do
+    Tabs.Player:AddDropdown("player_method", {
+        Title = "Movement Method",
+        Values = {"CFrame", "Regular"},
+        Multi = false,
+        Default = 2,
+    })
+
+    Tabs.Player:AddSlider("player_speed", {
+        Title = "Speed",
+        Description = "Configuration for player speed.",
+        Default = 0,
+        Min = 0,
+        Max = 100,
+        Rounding = 3
+    })
+
+    Tabs.Player:AddSlider("player_jumping", {
+        Title = "Power",
+        Description = "Configuration for jump power.",
+        Default = 0,
+        Min = 0,
+        Max = 100,
+        Rounding = 3
+    })
+end
 
 SaveManager:SetLibrary(Fluent) InterfaceManager:SetLibrary(Fluent) SaveManager:IgnoreThemeSettings() SaveManager:SetIgnoreIndexes({}) InterfaceManager:SetFolder("Lunar") SaveManager:SetFolder("Lunar/" .. tostring(game.PlaceId)) InterfaceManager:BuildInterfaceSection(Tabs.Settings) SaveManager:BuildConfigSection(Tabs.Settings) Window:SelectTab(1) SaveManager:LoadAutoloadConfig()
-`
