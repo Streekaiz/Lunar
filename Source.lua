@@ -21,15 +21,27 @@ Utility[1]:Connect(game:GetService("RunService").RenderStepped, function()
     -- // #highlight
     if Flags.visuals_highlight then
         for _, v in next, game:GetService("Players"):GetPlayers() do
-            if Utility[1]:isAlive(v) then
+            if Utility[1]:isAlive(v) and (Flags.visuals_team and (Utility[1]:isFriendly(v) ~= true) or true) then
                 local Highlight = nil
                 if not HighlightFolder[v.Name] then
                     Highlight = Instance.new("Highlight", HighlightFolder)
-                    
+                    Highlight.Adornee = v.Character
+                end
+                for _, v in next, HighlightFolder:GetChildren() do
+                    Highlight.FillColor = Flags.visuals_highlight_color1
+                    Highlight.OutlineColor = Flags.visuals_highlight_color2 
+                    Highlight.FillTransparency = Flags.visuals_highlight_transparency1
+                    Highlight.OutlineTransparency = Flags.visuals_highlight_transparency2
                 end
             end
         end
     end
 end
+
+Utility[1]:Connect(game:GetService("Players").PlayerRemoving, function(Player)
+    if HighlightFolder[Player.Name] then
+        HighlightFolder[Player.Name]:Destroy()
+    end
+end)
 
 
