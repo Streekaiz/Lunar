@@ -1,3 +1,10 @@
+--// Variables
+local Players = game:GetService("Players")
+local LPlayer = Players.LocalPlayer
+local Team = LPlayer.Team
+local Mouse = game:GetService("UserInputService"):GetMouseLocation()
+
+
 local Library = {
     Connections = {},
     Drawings = {}
@@ -31,10 +38,7 @@ function Library:Unload()
 end
 
 function Library:isFriendly(Player)
-    if Player.Team == game:GetService("Players").LocalPlayer.Team then
-        return true
-    end
-    return false
+    return Player.Team == Team
 end
 
 function Library:isAlive(Player)
@@ -46,14 +50,27 @@ function Library:isAlive(Player)
     return false
 end
 
-function Library:hasTool(Player)
-    if Player.Character then 
+function Library:getTool(Player)
+    if Library:isAlive(Player) then 
         if Player.Character:FindFirstChildWhichIsA("Tool") then
             return Player.Character:FindFirstChildWhichIsA("Tool").Name
         end
     end
 end
-function Library:ConvertPercentage(Percentage)
+
+function Library:getDistance(Player)
+    if Library:isAlive(Player) and Library:isAlive(LPlayer) then
+        return math.round((Player.Character.HumanoidRootPart.Position - LPlayer.Character.HumanoidRootPart.Position).Magnitude)
+    end
+
+    --[[
+    outdated system; use distancefromplayer or whatever (change later)
+    ]]
+
+    return 0
+end
+
+function Library:convertPercentage(Percentage)
     local Random = math.random(0, 100)
     if Random < Percentage then
         return true
@@ -69,4 +86,42 @@ function Library:Ray(Part, Orgin, Ignore, Distance)
     local Hit = workspace:FindPartOnRayWithIgnoreList(Cast, Ignore)
 
     return (Hit and Hit:IsADescendantOf(Part.Parent)) == true, Hit
+end
+
+function Library:getClosestPlayerToMouse(Friendly, Distance, Visible)
+    local CurrentMouseDistance = 1000
+    local Target
+
+    for _, v in next, game:GetService("Players"):GetPlayers() do
+        
+        --// Simple validation checks
+        if v == LPlayer then return end
+        if not Library:isAlive(v) and not Library:isAlive(LPlayer) then return end
+        if Friendly and Library:isFriendly(v) then return end 
+        if Distance[1] == true and Library:getDistance(v) <= Distance[2] then return end
+
+        local isVisible = true
+
+        if Visible[1] then -- idk how to use raycasts????????
+            local Results, Success = Library:Ray(v.Character[Visible[2]], LPlayer.Character[Visible[3]], {}, Distance[2])
+            if Success == false or Results.Hit ~= v.Character[Visible[2]] then
+                isVisible = false
+            end
+        end
+
+        if not isVisible then return end
+        
+        local Success, TargetPosition = workspace.CurrentCamera:WorldToViewportPoint(v.Character[Visible[2]])
+
+        if not Success then return end
+
+        local TargetMouseDistance = Vector2.new(TargetPosition.X - Mouse.X, TargetPosition.Y - TargetPosition.Y)
+
+        if CurrentMouseDistance > TargetMouseDistance then
+            CurrentMouseDistance = TargetMouseDistance
+            Target = v 
+        end
+    end
+
+    return Target
 end
