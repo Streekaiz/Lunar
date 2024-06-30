@@ -7,7 +7,14 @@ local Mouse = game:GetService("UserInputService"):GetMouseLocation()
 
 local Library = {
     Connections = {},
-    Drawings = {}
+    Drawings = {},
+    HitSounds = {
+        Rust = 5043539486,
+        CSGO = 8679627751,
+        TF2 = 5650646664,
+        Neverlose = 8679627751,
+        Gamesense = 4753603610,
+    }
 }
 
 function Library:Connect(Connection, Function)
