@@ -7,9 +7,6 @@
 ## File Initalization 
 
 ```lua
-assert(writefolder and "Your executor isn't supported.")
-assert(writefile and "Your executor isn't supported.")
---
 writefolder("Lunar")
 writefolder("Lunar/components")
 writefolder("Lunar/themes")
