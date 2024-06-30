@@ -15,9 +15,9 @@ writefolder("Lunar/components")
 writefolder("Lunar/themes")
 writefolder("Lunar/configs")
 --
-writefile("Lunar/components/Utility.lua", game:HttpGet(""))
+writefile("Lunar/components/Library.lua", game:HttpGet("https://github.com/Streekaiz/Lunar/blob/main/comps/unminified/Library.lua"))
+writefile("Lunar/components/Utility.lua", game:HttpGet("https://github.com/Streekaiz/Lunar/blob/main/comps/minfied/Functions.lua"))
 writefile("Lunar/components/Math.lua", game:HttpGet("https://rawgithubusercontent.com/Streekaiz/Lunar/comps/minified/Math.lua"))
-writefile("Lunar/components/Visual.lua", game:HttpGet(""))
 writefile("Lunar/components/Color.lua", game:HttpGet("https://rawgithubusercontent.com/Streekaiz/Lunar/comps/minified/Color.lua"))
 writefile("Lunar/components/Tween.lua", game:HttpGet("https://rawgithubusercontent.com/Streekaiz/Lunar/comps/minified/Tween.lua"))
 ```
