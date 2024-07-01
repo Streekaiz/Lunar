@@ -1,1 +1,0 @@
-local a,b,c,d,e,f,g=Vector2.new,Vector3.new,math.random,math.round,math.acos,math.cos,{}function g:RoundVector(h)return a(d(h.X),d(h.Y))end;function g:Shift(i)return e(f(i*Pi))/Pi end;function g:Random(i)return c(-i,i)end;function g:RandomVec3(j,k,l)return b(g:Random(j),g:Random(k),g:Random(l))end;return g

@@ -1,1 +1,0 @@
-local a={}function a:Multiply(a,b)return Color3.new(a.R*b,a.G*b,a.B*b)end;function a:Add(a,c)return Color3.new(a.R+c,a.G+c,a.B+c)end;function a:Lerp(d,e,f)if d<=0 then return f end;if d>=100 then return e end;return Color3.new(f.R+(e.R-f.R)*d,f.G+(e.G-f.G)*d,f.B+(e.B-f.B)*d)end;return a
