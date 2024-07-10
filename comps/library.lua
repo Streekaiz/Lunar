@@ -3,7 +3,7 @@ local ThemeManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/
 local SaveManager = loadstring(game:HttpGet('https://raw.githubusercontent.com/Streekaiz/linoria-fork/main/addons/SaveManager.lua'))()
 
 local Window = Library:CreateWindow({
-    Title = 'Lunar | ' .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
+    Title = 'Lunar | ' .. ' | ' .. game:GetService("Players").LocalPlayer.Name .. ' | ' .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. " | " .. identifyexecutor(),
     Center = true,
     AutoShow = true,
     TabPadding = 4,
@@ -21,31 +21,48 @@ Window:AddTab("Settings")
 --// Combat
 
 local Hitbox = Window.Tabs.Combat:AddLeftGroupbox('Hitbox Expander') do
-	Hitbox:AddToggle('hitbox_enabled', { Text = 'Enabled', Tooltip = "Expands other enemies hitboxes.", Risky = true }):AddKeyPicker('hitbox_key', {SyncToggleState = true, Mode = 'Toggle', Default = "PageUp", Text = 'Hitbox Expander', NoUI = false})
+	Hitbox:AddToggle('hitbox_enabled', { Text = 'Enabled', Tooltip = "Expands other enemies hitboxes.", Risky = true }):AddKeyPicker('hitbox_key', {SyncToggleState = true, Mode = 'Toggle', Default = "PageUp", Text = 'Hitbox Expander', NoUI = false}):AddColorPicker('hitbox_color', { Default = Color3.fromRGB(255, 255, 255), Title = 'Hitbox Color', Transparency = 0 })
 
 	local Depbox = Hitbox:AddDependencyBox()
 
+	Depbox:AddToggle('hitbox_ffa', { Text = 'FFA Mode', Risky = false });
+
 	Depbox:AddDropdown('hitbox_part', {
-		Values = {"Head", "Body"}, Default = 1,
+		Values = {"Head", "Torso",}, Default = 1,
 	
 		Text = '-> Hitbox Target',
-		Tooltip = 'Expands the selected hitbox',
 	})
 	
-	Depbox:AddSlider('hitbox_amount', {
-		Text = '-> Expansion Value', Default = 3, Min = 0, Max = 10, Rounding = 2, Tooltip = "Affects how expanded the hitbox is."
+	Depbox:AddSlider('hitbox_amount_x', {
+		Text = '-> Expansion X Value', Default = 3, Min = 0, Max = 6.5, Rounding = 2
 	})
 
-	Depbox:AddToggle('hitbox_ffa', { Text = 'FFA Mode', Tooltip = "Expand other players hitboxes.", Risky = false });
+	Depbox:AddSlider('hitbox_amount_y', {
+		Text = '-> Expansion Y Value', Default = 3, Min = 0, Max = 6.5, Rounding = 2
+	})
 
+	Depbox:AddSlider('hitbox_amount_z', {
+		Text = '-> Expansion Z Value', Default = 3, Min = 0, Max = 6.5, Rounding = 2
+	})
 
 	Depbox:AddDropdown('hitbox_whitelist', {
-	
 		SpecialType = "Player",
 		Multi = true,
-		Text = 'Whitelist Player'
+		Text = '-> Whitelist Player'
 	})
+
+	Depbox:AddDivider()
+
+	Depbox:AddSlider('hitbox_transparency', {
+		Text = '-> Transparency', Default = 0, Min = 0, Max = 1, Rounding = 2
+	})
+
+	Depbox:AddDropdown('hitbox_material', {
+		Values = {"Glass", "ForceField", "Neon", "Plastic"}, Default = 2,
 	
+		Text = '-> Material'
+	})
+
 
 	Depbox:SetupDependencies({
 		{ Toggles.hitbox_enabled, true }
@@ -53,7 +70,7 @@ local Hitbox = Window.Tabs.Combat:AddLeftGroupbox('Hitbox Expander') do
 end
 
 local Aimbot = Window.Tabs.Combat:AddLeftGroupbox('Aim Assist') do
-	Aimbot:AddToggle('aimbot_enabled', { Text = 'Enabled', Tooltip = "Moves your cursor towards other players.", Risky = true }):AddKeyPicker('aimbot_key', {SyncToggleState = false, Mode = 'Hold', Default = "PageUp", Text = 'Aim Assist', NoUI = false})
+	Aimbot:AddToggle('aimbot_enabled', { Text = 'Enabled', Risky = true }):AddKeyPicker('aimbot_key', {SyncToggleState = false, Mode = 'Hold', Default = "PageUp", Text = 'Aim Assist', NoUI = false})
 
 	local Depbox = Aimbot:AddDependencyBox()
 	
@@ -67,7 +84,6 @@ local Aimbot = Window.Tabs.Combat:AddLeftGroupbox('Aim Assist') do
 		Values = {"CFrame", "Mousemoverel"}, Default = 1,
 	
 		Text = '-> Method',
-		Tooltip = "mousemoverel disabled until wave is free"
 	})
 
 	Depbox:AddDropdown('aimbot_checks', {
@@ -171,7 +187,7 @@ local Silent_Aim = Window.Tabs.Combat:AddRightGroupbox('Silent Aim') do
 	})
 
 	Depbox:AddSlider('silent_aim_fov_radius', {
-		Text = '-> Radius', Default = 100, Min = 0, Max = 100, Rounding = 0, Suffix = "%"
+		Text = '-> Radius', Default = 180, Min = 0, Max = 360, Rounding = 0, Suffix = "%"
 	})
 
 	Depbox:AddDivider()
@@ -250,8 +266,8 @@ local Camera = Window.Tabs.Visual:AddRightGroupbox("Camera") do
 	fovdepbox:AddSlider('visual_fov_value', { Text = '-> FOV Value', Compact = false, Default = 70, Min = 1, Max = 120, Rounding = 1})
 	Camera:AddToggle('visual_streched_enabled', { Text = 'Streched Resolution', Default = false })
 	local strechdepbox = Camera:AddDependencyBox()
-	strechdepbox:AddSlider('visual_streched_value', { Text = '-> Streched Multiplier', Compact = false, Default = 1, Min = -1, Max = 1, Rounding = 1})
-	Camera:AddToggle('visual_third_enabled', { Text = 'Streched Resolution', Default = false })
+	strechdepbox:AddSlider('visual_streched_value', { Text = '-> Streched Multiplier', Compact = false, Default = 0.5, Min = -1, Max = 1, Rounding = 1})
+	Camera:AddToggle('visual_third_enabled', { Text = 'Third Person', Default = false })
 	local thirddepbox = Camera:AddDependencyBox()
 	thirddepbox:AddSlider('visual_third_x', { Text = 'X', Compact = true, Default = 0, Min = -10, Max = 10, Rounding = 1})
 	thirddepbox:AddSlider('visual_third_y', { Text = 'Y', Compact = true, Default = 0, Min = -10, Max = 10, Rounding = 1})
