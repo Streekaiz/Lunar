@@ -133,4 +133,4 @@ function Library:getClosestPlayerToMouse(Friendly, Distance, Visible)
     return Target
 end
 
-    return Library
+return Library
