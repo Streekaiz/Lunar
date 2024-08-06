@@ -176,11 +176,21 @@ do --// Setting up combat tab
             
                 Text = '> Hitbox Target',
             })
+
+            Legitbot:AddToggle("Legitbot_Hitbox_FFA", {
+                Text = "FFA",
+                Default = false,
+                Tooltip = "Enables FFA Mode"
+            })
+
+            Legitbot:AddDropdown('Legitbot_Hitbox_Material', {
+                Values = {"ForceField", "Neon", "Glass"}, Default = 1,
             
-            Legitbot:AddDropdown('Legitbot_Hitbox_Checks', {
-                Values = {"Friendly", "Visibility",}, Default = 1, Multi = false,
-            
-                Text = '> Hitbox Checks',
+                Text = '> Hitbox Material',
+            })
+
+            Legitbot:AddSlider('Legitbot_Hitbox_Transparency', {
+                Text = '> Transparency', Default = 0.5, Min = 0, Max = 1, Rounding = 2, HideMax = true
             })
 
             Legitbot:AddSlider('Legitbot_Hitbox_Scale_X', {
