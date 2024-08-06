@@ -2,9 +2,16 @@
 local InputService, TeleportService, RunService, Workspace, Lighting, Players, HttpService, StarterGui, ReplicatedStorage, TweenService  = game:GetService("UserInputService"), game:GetService("TeleportService"), game:GetService("RunService"), game:GetService("Workspace"), game:GetService("Lighting"), game:GetService("Players"), game:GetService("HttpService"), game:GetService("StarterGui"), game:GetService("ReplicatedStorage"), game:GetService("TweenService")
 local LocalPlayer = Players.LocalPlayer
 local Mouse, Camera = LocalPlayer:GetMouse(), Workspace.Camera
-local Library = {Connections = {}, Drawings = {}}
+local Library = {Connections = {}}
 
 do 
+    function Library:Call(Function)
+        local Error, Message = pcall(Function)
+        if Error then
+            return Error, Message 
+        end
+    end
+    --
     function Library:Connection(Type, Callback)
         local Connection = Type:Connect(Callback)
         Library.Connections[#Library.Connections + 1] = Connection
@@ -20,8 +27,6 @@ do
                 obj[i] = v
             end
         end
-        --
-        table.insert(Library.Drawings, obj)
         return obj  
     end
     --
@@ -255,9 +260,6 @@ do
     function Library:Unload()
         for i, v in next, Library.Connections do
             v:Disconnect()
-        end
-        for i, v in next, Library.Connections do 
-            v:Remove()
         end
     end
 end
