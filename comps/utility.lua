@@ -30,20 +30,21 @@ do
         return obj  
     end
     --
-    function Library:GetStatus(Player)
+    function Library:isAlive(Player)
         local Alive = false
-        local Character
-
-        if Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
-            if Player.Character:FindFirstChildWhichIsA("Humanoid") then 
-                if Player.Character:FindFirstChildWhichIsA("Humanoid").Health > 0 then
-                    Alive = true
-                end
+        if Player.Character and Player.Character:FindFirstChildWhichIsA("Humanoid") then
+            if Player.Character:FindFirstChildWhichIsA("Humanoid").Health > 0 then 
+                Alive = true
             end
         end
-
-        return Library:GetTeamStatus(LocalPlayer, Player), Alive, Player.Character
+        
+        return Alive 
     end
+    --
+    function Library:isFriendly(Player)
+        return (Player.Team == LocalPlayer.Team)
+    end
+    --
     function Library:ChangeProperties(Object, Properties)
         for i, v in next, Properties do 
             Object[i] = v 
@@ -121,15 +122,6 @@ do
         --
         return Workspace.CurrentCamera.CFrame.Position
     end
-    --
-    function Library:GetTeamStatus(Player1, Player2)
-        return (Player1.Team ~= Player2.Team)
-    end
-    --
-    function Library:GetPlayerStatus(Player: Instance)
-        if not Player then Player = LocalPlayer end
-        return Player.Character and Player.Character:FindFirstChild("Humanoid") and Player.Character.Humanoid.Health > 0 and true or false
-    end 
     --
     function Library:GetClosestPart(Player: Instance, List: Table)
         local shortestDistance = math.huge
